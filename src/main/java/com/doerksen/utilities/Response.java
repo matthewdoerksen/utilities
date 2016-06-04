@@ -15,9 +15,9 @@ public interface Response<T> {
 
     boolean isSuccess();
 
-    String message();
+    String getMessage();
 
-    int statusCode();
+    int getStatusCode();
 
     @JsonIgnore
     Throwable getThrowable();
