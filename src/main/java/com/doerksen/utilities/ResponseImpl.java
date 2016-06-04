@@ -28,21 +28,26 @@ public class ResponseImpl<T> implements Response<T> {
      */
     public ResponseImpl(final T object,
                         final int statusCode) {
-        Preconditions.checkNotNull(object);
-        this.object = object;
-        this.statusCode = statusCode;
-        success = true;
-    }
-
-    public ResponseImpl(final String message,
-                        final int statusCode) {
-        Preconditions.checkNotNull(message);
-        this.message = message;
-        this.statusCode = statusCode;
+        this(object, statusCode, true);
     }
 
     /**
-     * /**
+     * Create a success/error response with the object and status code
+     * @param object
+     * @param statusCode - please use org.apache.http.HttpStatus for consistency
+     * @param success
+     */
+    public ResponseImpl(final T object,
+                        final int statusCode,
+                        final boolean success) {
+        Preconditions.checkNotNull(object);
+        this.object = object;
+        this.statusCode = statusCode;
+        this.success = success;
+    }
+
+    /**
+     * Creates a failure message with an error message, status code and throwable
      * @param message
      * @param statusCode - please use org.apache.http.HttpStatus for consistency
      * @param throwable
@@ -57,6 +62,24 @@ public class ResponseImpl<T> implements Response<T> {
         this.throwable = throwable;
     }
 
+    /**
+     * Creates a success response; for when you only care about the pass/fail result.
+     * @param statusCode - required so the caller can branch based on a particular code if needed
+     * @return
+     */
+    public static Response<String> success(final int statusCode) {
+        return new ResponseImpl<>("success", statusCode);
+    }
+
+    /**
+     * Creates a failure response; for when you only care about the pass/fail result.
+     * @param statusCode - required so the caller can branch based on a particular code if needed
+     * @return
+     */
+    public static Response<String> error(final int statusCode) {
+        return new ResponseImpl<>("error", statusCode, false);
+    }
+
     public T getObject() {
         return object;
     }
@@ -69,11 +92,11 @@ public class ResponseImpl<T> implements Response<T> {
         return success;
     }
 
-    public String message() {
+    public String getMessage() {
         return message;
     }
 
-    public int statusCode() {
+    public int getStatusCode() {
         return statusCode;
     }
 
