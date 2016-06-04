@@ -47,7 +47,7 @@ public class ResponseImpl<T> implements Response<T> {
     }
 
     /**
-     * Creates a failure message with an error message, status code and
+     * Creates a failure message with an error message, status code and throwable
      * @param message
      * @param statusCode - please use org.apache.http.HttpStatus for consistency
      * @param throwable
