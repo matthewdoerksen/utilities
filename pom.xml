@@ -81,7 +81,6 @@
                                     <type>${project.packaging}</type>
                                 </artifactItem>
                             </artifactItems>
-                            <!-- .../git_projects/utilities/elasticsearch/module_jars -->
                             <outputDirectory>/Users/mdoerksen/.m2/repository/utilities/module_jars</outputDirectory>
                         </configuration>
                     </execution>
