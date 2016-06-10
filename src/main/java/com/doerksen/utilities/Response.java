@@ -15,10 +15,10 @@ public interface Response<T> {
 
     boolean isSuccess();
 
-    String getMessage();
-
     int getStatusCode();
 
     @JsonIgnore
     Throwable getThrowable();
+
+    String getErrorMsg();
 }

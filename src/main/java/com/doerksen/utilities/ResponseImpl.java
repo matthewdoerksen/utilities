@@ -9,7 +9,7 @@ public class ResponseImpl<T> implements Response<T> {
     private T object;
     private int statusCode;
     private boolean success;
-    private String message;
+    private String errorMsg;
     private Throwable throwable;
 
     /**
@@ -18,17 +18,7 @@ public class ResponseImpl<T> implements Response<T> {
     public ResponseImpl() {}
 
     public ResponseImpl(final T object) {
-        this(object, SC_OK);
-    }
-
-    /**
-     * Creates a success response with the object
-     * @param object
-     * @param statusCode - please use org.apache.http.HttpStatus for consistency
-     */
-    public ResponseImpl(final T object,
-                        final int statusCode) {
-        this(object, statusCode, true);
+        this(object, SC_OK, true);
     }
 
     /**
@@ -47,17 +37,17 @@ public class ResponseImpl<T> implements Response<T> {
     }
 
     /**
-     * Creates a failure message with an error message, status code and throwable
-     * @param message
+     * Creates a failure response with an error message, status code and throwable
+     * @param errorMsg
      * @param statusCode - please use org.apache.http.HttpStatus for consistency
      * @param throwable
      */
-    public ResponseImpl(final String message,
+    public ResponseImpl(final String errorMsg,
                         final int statusCode,
                         final Throwable throwable) {
-        Preconditions.checkNotNull(message);
+        Preconditions.checkNotNull(errorMsg);
         Preconditions.checkNotNull(throwable);
-        this.message = message;
+        this.errorMsg = errorMsg;
         this.statusCode = statusCode;
         this.throwable = throwable;
     }
@@ -68,12 +58,12 @@ public class ResponseImpl<T> implements Response<T> {
      * @return
      */
     public static Response<String> success(final int statusCode) {
-        return new ResponseImpl<>("success", statusCode);
+        return new ResponseImpl<>("success", statusCode, true);
     }
 
     /**
      * Creates a failure response; for when you only care about the pass/fail result.
-     * @param statusCode - required so the caller can branch based on a particular code if needed
+     *
      * @return
      */
     public static Response<String> error(final int statusCode) {
@@ -92,15 +82,15 @@ public class ResponseImpl<T> implements Response<T> {
         return success;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
     public int getStatusCode() {
         return statusCode;
     }
 
     public Throwable getThrowable() {
         return throwable;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
     }
 }
