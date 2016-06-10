@@ -46,7 +46,6 @@ public class ResponseImpl<T> implements Response<T> {
                         final int statusCode,
                         final Throwable throwable) {
         Preconditions.checkNotNull(errorMsg);
-        Preconditions.checkNotNull(throwable);
         this.errorMsg = errorMsg;
         this.statusCode = statusCode;
         this.throwable = throwable;
