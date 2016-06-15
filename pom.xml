@@ -53,6 +53,11 @@
             <artifactId>maven-artifact</artifactId>
             <version>3.3.9</version>
         </dependency>
+        <dependency>
+            <groupId>com.newrelic.agent.java</groupId>
+            <artifactId>newrelic-api</artifactId>
+            <version>3.29.0</version>
+        </dependency>
     </dependencies>
 
     <build>
