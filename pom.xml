@@ -58,6 +58,11 @@
             <artifactId>newrelic-api</artifactId>
             <version>3.29.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-auth</artifactId>
+            <version>${dropwizard.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
